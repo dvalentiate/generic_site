@@ -10,6 +10,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 $app = new Silex\Application();
 
+ini_set('display_errors', 1);
 $app['debug'] = true;
 
 $app->get('/', function () use ($app) {
@@ -17,7 +18,8 @@ $app->get('/', function () use ($app) {
 });
 
 $app->get('/helloworld', function() use ($app) {
-	return (new Scenic\View('view'))->render('helloworld.phtml', array(
+	$view = new Scenic\View(__DIR__ . '/view');
+	return $view->render('helloworld.phtml', array(
 		'title' => 'Hello World!',
 	));
 });
